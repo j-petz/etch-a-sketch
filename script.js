@@ -1,18 +1,19 @@
 const container = document.querySelector("#container");
-container.setAttribute(
-    "style",
-    "display: flex; flex-wrap: wrap; gap: 2px; height: 400px; width: 400px; margin: 0 auto;",
-);
+container.setAttribute("style", "width: 400px; aspect-ratio: 1 / 1;");
+
+let containerWidth = container.offsetWidth;
 
 const amountOfSquares = 4;
 
-let div = document.createElement("div");
-div.setAttribute(
-    "style",
-    "height: 20px; width: 20px; background-color: #333; border-radius: 4px",
-);
+let squareWidth = containerWidth / amountOfSquares - 2;
 
 function createSquares() {
+    let div = document.createElement("div");
+    div.setAttribute("class", "square");
+    div.setAttribute(
+        "style",
+        "width: " + squareWidth + "px; aspect-ratio: 1 / 1",
+    );
     container.appendChild(div);
 }
 
