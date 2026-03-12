@@ -1,21 +1,38 @@
 const main = document.querySelector("main");
 
-const amountOfSquares = 4;
+const btnCalculate = document.querySelector("button");
+btnCalculate.addEventListener("click", createSquares);
+
+const btnDelete = document.querySelector("#del");
+btnDelete.addEventListener("click", deleteSquares);
+
+let amountOfSquares = 0;
 
 function createSquares() {
-    let div = document.createElement("div");
-    div.setAttribute("class", "square");
-    main.appendChild(div);
+    deleteSquares();
+
+    amountOfSquares = document.getElementById("amountOfSquares").value;
+
+    for (let i = 0; i < Math.pow(amountOfSquares, 2); i++) {
+        let div = document.createElement("div");
+        div.setAttribute("class", "square");
+        main.appendChild(div);
+    }
+
+    let square = document.querySelector(".square");
+    let squareWidth = square.offsetWidth;
+    console.log(squareWidth);
+    main.setAttribute(
+        "style",
+        "width:" +
+            (squareWidth + 2) * amountOfSquares +
+            "px; aspect-ratio: 1 / 1;",
+    );
 }
 
-for (let i = 0; i < Math.pow(amountOfSquares, 2); i++) {
-    createSquares();
+function deleteSquares() {
+    let child = document.querySelector(".square");
+    while (main.firstChild) {
+        main.removeChild(main.lastChild);
+    }
 }
-
-let square = document.querySelector(".square");
-let squareWidth = square.offsetWidth;
-console.log(squareWidth);
-main.setAttribute(
-    "style",
-    "width:" + (squareWidth + 2) * amountOfSquares + "px; aspect-ratio: 1 / 1;",
-);
