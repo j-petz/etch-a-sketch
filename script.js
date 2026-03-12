@@ -21,18 +21,25 @@ function createSquares() {
 
     let square = document.querySelector(".square");
     let squareWidth = square.offsetWidth;
-    console.log(squareWidth);
     main.setAttribute(
         "style",
         "width:" +
             (squareWidth + 2) * amountOfSquares +
             "px; aspect-ratio: 1 / 1;",
     );
+
+    let allSquares = document.querySelectorAll(".square");
+    allSquares.forEach((element) =>
+        element.addEventListener("mouseover", changeColor),
+    );
 }
 
 function deleteSquares() {
-    let child = document.querySelector(".square");
     while (main.firstChild) {
         main.removeChild(main.lastChild);
     }
+}
+
+function changeColor() {
+    this.style.backgroundColor = "lightcoral";
 }

@@ -10,11 +10,13 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    background-color: #222;
     padding: 0.5rem;
 }
 
 h1 {
     font-family: Helvetica, Arial, sans-serif;
+    color: lightblue;
 }
 
 header {
@@ -33,7 +35,7 @@ main {
 
 .container {
     display: flex;
-    width: 600px;
+    min-width: 600px;
     flex-direction: column;
     align-items: center;
     gap: 2rem;
@@ -42,6 +44,6 @@ main {
 .square {
     background-color: #333;
     border-radius: 4px;
-    height: 40px;
+    height: 12px;
     aspect-ratio: 1 / 1;
 }
