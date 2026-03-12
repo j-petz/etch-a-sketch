@@ -1,22 +1,21 @@
-const container = document.querySelector("#container");
-container.setAttribute("style", "width: 400px; aspect-ratio: 1 / 1;");
-
-let containerWidth = container.offsetWidth;
+const main = document.querySelector("main");
 
 const amountOfSquares = 4;
-
-let squareWidth = containerWidth / amountOfSquares - 2;
 
 function createSquares() {
     let div = document.createElement("div");
     div.setAttribute("class", "square");
-    div.setAttribute(
-        "style",
-        "width: " + squareWidth + "px; aspect-ratio: 1 / 1",
-    );
-    container.appendChild(div);
+    main.appendChild(div);
 }
 
 for (let i = 0; i < Math.pow(amountOfSquares, 2); i++) {
     createSquares();
 }
+
+let square = document.querySelector(".square");
+let squareWidth = square.offsetWidth;
+console.log(squareWidth);
+main.setAttribute(
+    "style",
+    "width:" + (squareWidth + 2) * amountOfSquares + "px; aspect-ratio: 1 / 1;",
+);
