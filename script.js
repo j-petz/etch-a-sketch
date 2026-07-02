@@ -47,7 +47,6 @@ colorVariant.onchange = changeVariant;
 
 function createSquares() {
     deleteSquares();
-    console.log(baseSquareOpacity);
 
     amountOfSquares = document.getElementById("amountOfSquares").value;
 
