@@ -6,7 +6,41 @@ btnCalculate.addEventListener("click", createSquares);
 const btnDelete = document.querySelector("#del");
 btnDelete.addEventListener("click", deleteSquares);
 
+let baseSquareOpacity = 1;
+
 let amountOfSquares = 0;
+
+let colorVariant = document.getElementById('select-variant');
+let colorValue = colorVariant.value;
+function changeVariant() {
+    colorValue = colorVariant.value;
+    let baseSquare = document.querySelectorAll('main div');
+
+    switch(colorValue) {
+        case 'monochrome':
+            baseSquareOpacity = 1;
+            baseSquare.forEach(element => {
+                element.setAttribute('class', 'square');
+                element.removeAttribute('style');
+            });
+            break;
+        case 'random':
+            baseSquareOpacity = 1;
+            baseSquare.forEach(element => {
+                element.setAttribute('class', 'square');
+                element.removeAttribute('style');
+            });
+            break;
+        case 'opacity':
+            baseSquareOpacity = 0;
+            baseSquare.forEach(element => {
+                element.setAttribute('class', 'square-transparent');
+                element.removeAttribute('style');
+            });
+            break;
+    }
+}
+colorVariant.onchange = changeVariant;
 
 function createSquares() {
     deleteSquares();
@@ -41,23 +75,28 @@ function deleteSquares() {
 }
 
 function changeColor() {
-    // one color
-    //this.style.backgroundColor = "lightcoral";
 
-    // random color
-    /* let red = Math.floor(Math.random() * 256);
-    let green = Math.floor(Math.random() * 256);
-    let blue = Math.floor(Math.random() * 256);
-    this.style.backgroundColor = "rgb(" + red + "," + green + "," + blue + ")"; */
+    switch (colorValue) {
+        case 'monochrome':
+            this.style.backgroundColor = "lightcoral";
+            break;
 
-    //opacity
-    let hoveredSquare = this;
-    let computedStyles = window.getComputedStyle(hoveredSquare);
-    let currentOpacity = computedStyles.getPropertyValue("opacity");
-    let currentOpacityFloat = Number(currentOpacity);
-    if (currentOpacityFloat < 1) {
-        let newOpacity = currentOpacityFloat + 0.1;
-        hoveredSquare.style.opacity = newOpacity;
+        case 'random':
+            let red = Math.floor(Math.random() * 256);
+            let green = Math.floor(Math.random() * 256);
+            let blue = Math.floor(Math.random() * 256);
+            this.style.backgroundColor = "rgb(" + red + "," + green + "," + blue + ")";
+            break;
+
+        case 'opacity':
+            let hoveredSquare = this;
+            let computedStyles = window.getComputedStyle(hoveredSquare);
+            let currentOpacity = computedStyles.getPropertyValue("opacity");
+            let currentOpacityFloat = Number(currentOpacity);
+            if (currentOpacityFloat < 1) {
+                let newOpacity = currentOpacityFloat + 0.1;
+                hoveredSquare.style.opacity = newOpacity;
+            }
+            break;
     }
-    //console.log("opacity:", currentOpacity);
 }
