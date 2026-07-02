@@ -1,7 +1,8 @@
 const main = document.querySelector("main");
+const footer = document.querySelector('footer');
 
-const btnCalculate = document.querySelector("button");
-btnCalculate.addEventListener("click", createSquares);
+const btnGenerate = document.querySelector("button");
+btnGenerate.addEventListener("click", createSquares);
 
 const btnClear = document.querySelector("#clear");
 btnClear.addEventListener("click", clearSquares);
@@ -50,29 +51,36 @@ function createSquares() {
 
     amountOfSquares = document.getElementById("amountOfSquares").value;
 
-    for (let i = 0; i < Math.pow(amountOfSquares, 2); i++) {
-        let div = document.createElement("div");
-        if (baseSquareOpacity == 0) {
-            div.setAttribute("class", "square-transparent")
-        } else {
-            div.setAttribute("class", "square");
+    if (amountOfSquares <= 80) {
+        for (let i = 0; i < Math.pow(amountOfSquares, 2); i++) {
+            let div = document.createElement("div");
+            if (baseSquareOpacity == 0) {
+                div.setAttribute("class", "square-transparent")
+            } else {
+                div.setAttribute("class", "square");
+            }
+            main.appendChild(div);
         }
-        main.appendChild(div);
+
+        let square = document.querySelector("main div");
+        let squareWidth = square.offsetWidth;
+        main.setAttribute(
+            "style",
+            "width:" +
+                (squareWidth + 2) * amountOfSquares +
+                "px; aspect-ratio: 1 / 1;",
+        );
+
+        let allSquares = document.querySelectorAll("main div");
+        allSquares.forEach((element) => {
+            element.addEventListener("mouseover", changeColor);
+        });
+        footer.textContent = "";
+    } else {
+        const errorMessage = "Please use a number smaller than 81!";
+        footer.textContent = errorMessage;
+        
     }
-
-    let square = document.querySelector("main div");
-    let squareWidth = square.offsetWidth;
-    main.setAttribute(
-        "style",
-        "width:" +
-            (squareWidth + 2) * amountOfSquares +
-            "px; aspect-ratio: 1 / 1;",
-    );
-
-    let allSquares = document.querySelectorAll("main div");
-    allSquares.forEach((element) => {
-        element.addEventListener("mouseover", changeColor);
-    });
 }
 
 function clearSquares() {
@@ -86,6 +94,7 @@ function deleteSquares() {
     while (main.firstChild) {
         main.removeChild(main.lastChild);
     }
+    footer.textContent = "";
 }
 
 function changeColor() {
