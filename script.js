@@ -3,6 +3,9 @@ const main = document.querySelector("main");
 const btnCalculate = document.querySelector("button");
 btnCalculate.addEventListener("click", createSquares);
 
+const btnClear = document.querySelector("#clear");
+btnClear.addEventListener("click", clearSquares);
+
 const btnDelete = document.querySelector("#del");
 btnDelete.addEventListener("click", deleteSquares);
 
@@ -44,16 +47,21 @@ colorVariant.onchange = changeVariant;
 
 function createSquares() {
     deleteSquares();
+    console.log(baseSquareOpacity);
 
     amountOfSquares = document.getElementById("amountOfSquares").value;
 
     for (let i = 0; i < Math.pow(amountOfSquares, 2); i++) {
         let div = document.createElement("div");
-        div.setAttribute("class", "square");
+        if (baseSquareOpacity == 0) {
+            div.setAttribute("class", "square-transparent")
+        } else {
+            div.setAttribute("class", "square");
+        }
         main.appendChild(div);
     }
 
-    let square = document.querySelector(".square");
+    let square = document.querySelector("main div");
     let squareWidth = square.offsetWidth;
     main.setAttribute(
         "style",
@@ -62,9 +70,16 @@ function createSquares() {
             "px; aspect-ratio: 1 / 1;",
     );
 
-    let allSquares = document.querySelectorAll(".square");
+    let allSquares = document.querySelectorAll("main div");
     allSquares.forEach((element) => {
         element.addEventListener("mouseover", changeColor);
+    });
+}
+
+function clearSquares() {
+    let baseSquare = document.querySelectorAll('main div');
+    baseSquare.forEach(element => {
+        element.removeAttribute('style');
     });
 }
 
